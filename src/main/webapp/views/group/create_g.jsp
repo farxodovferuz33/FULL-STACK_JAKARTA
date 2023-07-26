@@ -19,7 +19,8 @@
         <label for="exampleInputEmail1" class="form-label">Name of Group</label>
         <input type="text" class="form-control" name="name" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="e.g Football">
     </div>
-    <button type="submit" class="btn btn-primary">Add group</button>
+    <button type="submit" class="btn btn-success">Add group</button>
+    <a href="${pageContext.request.contextPath}/group" class="btn btn-primary">Back</a>
 </form>
 
 </body>

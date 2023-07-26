@@ -1,5 +1,6 @@
 package com.google.group_crud_jakartaee.servlets.students.views;
 
+import com.google.group_crud_jakartaee.models.student.Student;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,26 +10,43 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.postgresql.Driver;
 
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 @WebServlet(name = "HomeStudentServlet", value = "/student")
 public class HomeStudentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        var studentList = new ArrayList<Student>();
 
-
-        try{
+        try {
             DriverManager.registerDriver(new Driver());
-            DriverManager.getConnection("jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=students")
-        }catch (SQLException e){
+            Connection connection = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=students",
+                    "postgres", "123");
+            PreparedStatement preparedStatement = connection.prepareStatement("select * from students;");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                studentList.add(
+                        Student.builder().id(resultSet.getInt("id")).
+                                fullName(resultSet.getString("fullName")).
+                                createdAt(resultSet.getString("createdAt")).
+                                age(resultSet.getInt("age")).
+                                groupID(resultSet.getInt("groupId")).
+                                build()
+                );
+            }
+
+            req.setAttribute("studentsList", studentList);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/student/home.jsp");
+            requestDispatcher.forward(req, resp);
+
+        } catch (SQLException e) {
             e.printStackTrace();
         }
 
 
 
-        RequestDispatcher requestDispatcher = req.getRequestDispatcher("/views/student/home.jsp");
-        requestDispatcher.forward(req, resp);
 
     }
 

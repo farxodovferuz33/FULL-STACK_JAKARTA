@@ -17,7 +17,7 @@
 <h1>This is page of GROUP MAIN PAGE</h1>
 
 <a href="group/add" class="btn btn-success">Add new group</a>
-
+<a href="${pageContext.request.contextPath}/" class="btn btn-primary">Back</a>
 <table class="table table-dark table-striped">
     <thead>
     <tr>
@@ -25,6 +25,8 @@
         <th>Name</th>
         <th>Created At</th>
         <th>Student Count</th>
+        <th>Actions</th>
+
     </tr>
     </thead>
 
@@ -35,6 +37,10 @@
             <td><c:out value="${group.getName()}"/></td>
             <td><c:out value="${group.getCreatedAt()}"/></td>
             <td><c:out value="${group.getStudentCount()}"/></td>
+            <td>
+                <a href="group/delete/${group.getId()}" class="btn btn-danger">❌</a>||
+                <a href="group/update/${group.getId()}" class="btn btn-warning">✏</a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>

@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 public class Student {
-    private String id;
+    private int id;
     private String fullName;
-    private LocalDateTime createdAt;
-    private String GroupID;
+    private String createdAt;
+    private int groupID;
     private int age;
 }
