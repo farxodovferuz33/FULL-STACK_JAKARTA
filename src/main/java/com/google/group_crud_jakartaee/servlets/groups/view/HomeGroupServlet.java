@@ -14,7 +14,7 @@ import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-@WebServlet(name = "HomeServlet", value = "/mainn")
+@WebServlet(name = "HomeServlet", value = "/group")
 public class HomeGroupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
