@@ -39,7 +39,7 @@
             <td><c:out value="${student.getAge()}"/></td>
             <td>
                 <a href="student/delete/${student.getId()}" class="btn btn-danger">❌</a>||
-                <a href="group/update/${student.getId()}" class="btn btn-warning">✏</a>
+                <a href="student/update/${student.getId()}" class="btn btn-warning">✏</a>
             </td>
         </tr>
 

@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.postgresql.Driver;
+import org.postgresql.util.PSQLException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -35,7 +36,7 @@ public class GroupAddServlet extends HttpServlet {
             PreparedStatement preparedStatement = connection.prepareStatement("insert into groups (name) values (?)");
             preparedStatement.setString(1, name);
             preparedStatement.execute();
-            resp.sendRedirect("/mainn");
+            resp.sendRedirect("/group");
         } catch (SQLException e) {
             e.printStackTrace();
         }
