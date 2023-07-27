@@ -65,7 +65,8 @@ public class StudentUpdateServlet extends HttpServlet {
             preparedStatement.execute();
             resp.sendRedirect("/student");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/f_key_error_page.jsp");
+            requestDispatcher.forward(req, resp);
         }
     }
 }

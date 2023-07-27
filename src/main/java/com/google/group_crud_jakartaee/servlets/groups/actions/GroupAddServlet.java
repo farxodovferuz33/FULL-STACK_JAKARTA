@@ -25,20 +25,26 @@ public class GroupAddServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
 
-        try {
-            DriverManager.registerDriver(new Driver());
-            Connection connection = DriverManager.getConnection(
-                    "jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=groups",
-                    "postgres",
-                    "123"
-                    );
+        if (!name.equals("")){
+            try {
+                DriverManager.registerDriver(new Driver());
+                Connection connection = DriverManager.getConnection(
+                        "jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=groups",
+                        "postgres",
+                        "123"
+                );
 
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into groups (name) values (?)");
-            preparedStatement.setString(1, name);
-            preparedStatement.execute();
-            resp.sendRedirect("/group");
-        } catch (SQLException e) {
-            e.printStackTrace();
+                PreparedStatement preparedStatement = connection.prepareStatement("insert into groups (name) values (?)");
+                preparedStatement.setString(1, name);
+                preparedStatement.execute();
+                resp.sendRedirect("/group");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/cantBeBlank.jsp");
+            requestDispatcher.forward(req, resp);
         }
+
     }
 }
