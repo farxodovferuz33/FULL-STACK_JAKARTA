@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.Arrays" %><%--
   Created by IntelliJ IDEA.
   User: Feruz
   Date: 7/24/2023
@@ -15,7 +15,9 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand mx-5" href="#">Fakhadov Feruz</a>
+    <a class="navbar-brand mx-5" href="#"><%= request.getSession().getAttribute("username") != null ?
+            request.getSession().getAttribute("username") : "Not Logged Int"
+    %></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -39,6 +41,10 @@
           </ul>
         </li>
       </ul>
+      <div>
+<%--        <a href="/signup" class="btn btn-warning">Sign up</a>--%>
+        <a href="/login" class="btn btn-primary mx-2">Log in</a>
+      </div>
       <form class="d-flex mx-5" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
