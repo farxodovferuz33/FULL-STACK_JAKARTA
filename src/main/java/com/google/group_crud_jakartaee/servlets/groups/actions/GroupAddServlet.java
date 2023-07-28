@@ -24,6 +24,7 @@ public class GroupAddServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
+        String username = (String) req.getSession().getAttribute("username");
 
         if (!name.equals("")){
             try {
@@ -34,8 +35,9 @@ public class GroupAddServlet extends HttpServlet {
                         "123"
                 );
 
-                PreparedStatement preparedStatement = connection.prepareStatement("insert into groups (name) values (?)");
+                PreparedStatement preparedStatement = connection.prepareStatement("insert into groups (name, createdBy) values (?, ?)");
                 preparedStatement.setString(1, name);
+                preparedStatement.setString(2, username);
                 preparedStatement.execute();
                 resp.sendRedirect("/group");
             } catch (SQLException e) {

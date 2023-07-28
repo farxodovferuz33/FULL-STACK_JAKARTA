@@ -17,7 +17,7 @@ public class FilterUserServlet implements Filter {
         String username = (String) session.getAttribute("username");
         if (!req.getRequestURI().equals("/login") && username == null) {
             resp.sendRedirect("/login");
-        }else  filterChain.doFilter(req, resp);
+        }else filterChain.doFilter(req, resp);
     }
 
     @Override

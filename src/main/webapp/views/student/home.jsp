@@ -20,6 +20,7 @@
             <th>Created At</th>
             <th>Group ID</th>
             <th>Age</th>
+            <th>CreatedBy</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -31,6 +32,7 @@
                 <td><c:out value="${student.getCreatedAt()}"/></td>
                 <td><c:out value="${student.getGroupID()}"/></td>
                 <td><c:out value="${student.getAge()}"/></td>
+                <td><c:out value="${student.getCreatedBy()}"/></td>
                 <td>
                     <a href="student/delete/${student.getId()}" class="btn btn-danger">❌</a>||
                     <a href="student/update/${student.getId()}" class="btn btn-warning">✏</a>

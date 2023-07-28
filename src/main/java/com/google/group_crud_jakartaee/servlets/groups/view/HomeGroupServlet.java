@@ -32,7 +32,9 @@ public class HomeGroupServlet extends HttpServlet {
                 var groupObj = Group.builder().id(resultSet.getInt("id"))
                         .createdAt(resultSet.getString("createdAt"))
                         .name(resultSet.getString("name"))
-                        .studentCount(resultSet.getInt("studentCount")).build();
+                        .studentCount(resultSet.getInt("studentCount")).
+                        createdBy(resultSet.getString("createdBy")).
+                        build();
                 groupsList.add(groupObj);
             }
             req.setAttribute("groupsList", groupsList);

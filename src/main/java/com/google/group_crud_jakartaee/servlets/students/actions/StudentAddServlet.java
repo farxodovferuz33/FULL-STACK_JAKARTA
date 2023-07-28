@@ -28,6 +28,7 @@ public class StudentAddServlet extends HttpServlet {
         String name = req.getParameter("name");
         String age = req.getParameter("age");
         String groupId = req.getParameter("group_id");
+        String username = (String) req.getSession().getAttribute("username");
 
         if (!name.equals("") && !age.equals("") && !groupId.equals("")){
             try {
@@ -41,10 +42,11 @@ public class StudentAddServlet extends HttpServlet {
                         "postgres", "123"
 
                 );
-                PreparedStatement preparedStatementForStudent = connectionForStudent.prepareStatement("insert into students (fullName, age, groupId) values (?,?,?);");
+                PreparedStatement preparedStatementForStudent = connectionForStudent.prepareStatement("insert into students (fullName, age, groupId, createdBy) values (?,?,?,?);");
                 preparedStatementForStudent.setString(1, name);
                 preparedStatementForStudent.setInt(2, Integer.parseInt(age));
                 preparedStatementForStudent.setInt(3, Integer.parseInt(groupId));
+                preparedStatementForStudent.setString(4, username);
 
                 PreparedStatement preparedStatementForGroup = connectionForGroup.prepareStatement("update groups g set studentCount = studentCount+1 where g.id = ?");
                 preparedStatementForGroup.setInt(1, Integer.parseInt(groupId));

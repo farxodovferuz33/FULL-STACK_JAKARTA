@@ -15,4 +15,5 @@ public class Group {
     private String name;
     private String createdAt;
     private int studentCount;
+    private String createdBy;
 }

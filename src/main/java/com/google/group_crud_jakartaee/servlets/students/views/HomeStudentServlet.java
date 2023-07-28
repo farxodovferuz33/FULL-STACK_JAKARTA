@@ -33,6 +33,7 @@ public class HomeStudentServlet extends HttpServlet {
                                 createdAt(resultSet.getString("createdAt")).
                                 age(resultSet.getInt("age")).
                                 groupID(resultSet.getInt("groupId")).
+                                createdBy(resultSet.getString("createdBy")).
                                 build()
                 );
             }
