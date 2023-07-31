@@ -1,5 +1,9 @@
 package com.google.group_crud_jakartaee.servlets.students.actions;
 
+import com.google.group_crud_jakartaee.models.student.Students;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -30,28 +34,40 @@ public class StudentAddServlet extends HttpServlet {
         String groupId = req.getParameter("group_id");
         String username = (String) req.getSession().getAttribute("username");
 
+
         if (!name.equals("") && !age.equals("") && !groupId.equals("")){
+
+            EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("orm_example");
+            EntityManager entityManager = entityManagerFactory.createEntityManager();
+            entityManager.getTransaction().begin();
+
+            var student = Students.builder().createdBy(username).fullName(name).age(Integer.parseInt(age)).build();
+
+            entityManager.persist(student);
+
+            entityManager.getTransaction().commit();
+
             try {
                 DriverManager.registerDriver(new Driver());
-                Connection connectionForStudent = DriverManager.getConnection("jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=students",
-                        "postgres", "123"
-
-                );
-
+//                Connection connectionForStudent = DriverManager.getConnection("jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=students",
+//                        "postgres", "123"
+//
+//                );
+//
                 Connection connectionForGroup = DriverManager.getConnection("jdbc:postgresql://localhost:5432/crud_with_jakarta?currentSchema=groups",
                         "postgres", "123"
 
                 );
-                PreparedStatement preparedStatementForStudent = connectionForStudent.prepareStatement("insert into students (fullName, age, groupId, createdBy) values (?,?,?,?);");
-                preparedStatementForStudent.setString(1, name);
-                preparedStatementForStudent.setInt(2, Integer.parseInt(age));
-                preparedStatementForStudent.setInt(3, Integer.parseInt(groupId));
-                preparedStatementForStudent.setString(4, username);
+//                PreparedStatement preparedStatementForStudent = connectionForStudent.prepareStatement("insert into students (fullName, age, groupId, createdBy) values (?,?,?,?);");
+//                preparedStatementForStudent.setString(1, name);
+//                preparedStatementForStudent.setInt(2, Integer.parseInt(age));
+//                preparedStatementForStudent.setInt(3, Integer.parseInt(groupId));
+//                preparedStatementForStudent.setString(4, username);
 
                 PreparedStatement preparedStatementForGroup = connectionForGroup.prepareStatement("update groups g set studentCount = studentCount+1 where g.id = ?");
                 preparedStatementForGroup.setInt(1, Integer.parseInt(groupId));
 
-                preparedStatementForStudent.execute();
+//                preparedStatementForStudent.execute();
                 preparedStatementForGroup.execute();
                 resp.sendRedirect("/student");
             } catch (SQLException e) {

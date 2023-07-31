@@ -1,6 +1,6 @@
 package com.google.group_crud_jakartaee.servlets.students.actions;
 
-import com.google.group_crud_jakartaee.models.student.Student;
+import com.google.group_crud_jakartaee.models.student.Students;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +28,7 @@ public class StudentUpdateServlet extends HttpServlet {
 
             if (resultSet.next()) {
                 req.setAttribute("st",
-                        Student.builder().id(resultSet.getInt("id")).
+                        Students.builder().id(resultSet.getInt("id")).
                                 createdAt(resultSet.getString("createdAt")).
                                 age(resultSet.getInt("age")).
                                 groupID(resultSet.getInt("groupID")).

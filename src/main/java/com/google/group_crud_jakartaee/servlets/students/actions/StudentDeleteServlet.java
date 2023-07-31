@@ -1,6 +1,6 @@
 package com.google.group_crud_jakartaee.servlets.students.actions;
 
-import com.google.group_crud_jakartaee.models.student.Student;
+import com.google.group_crud_jakartaee.models.student.Students;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -29,7 +29,7 @@ public class StudentDeleteServlet extends HttpServlet {
             preparedStatement.setInt(1, pathInfo);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()){
-                var st = Student.builder().id(resultSet.getInt("id")).
+                var st = Students.builder().id(resultSet.getInt("id")).
                         age(resultSet.getInt("age")).
                         createdAt(resultSet.getString("createdAt")).
                         groupID(resultSet.getInt("groupId")).

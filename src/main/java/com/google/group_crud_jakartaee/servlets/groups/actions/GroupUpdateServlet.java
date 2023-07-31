@@ -1,6 +1,6 @@
 package com.google.group_crud_jakartaee.servlets.groups.actions;
 
-import com.google.group_crud_jakartaee.models.group.Group;
+import com.google.group_crud_jakartaee.models.group.Groups;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +28,7 @@ public class GroupUpdateServlet extends HttpServlet {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()){
-                var gr = Group.builder().id(resultSet.getInt("id")).
+                var gr = Groups.builder().id(resultSet.getInt("id")).
                         createdAt(resultSet.getString("createdAt")).
                         studentCount(resultSet.getInt("studentCount")).
                         name(resultSet.getString("name")).build();
