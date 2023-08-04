@@ -31,7 +31,9 @@ public class GroupAddServlet extends HttpServlet {
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("orm_example");
             EntityManager entityManager = entityManagerFactory.createEntityManager();
             entityManager.getTransaction().begin();
+
             var group = Groups.builder().name(name).createdBy(username).build();
+
             entityManager.persist(group);
             entityManager.getTransaction().commit();
             resp.sendRedirect("/group");
@@ -39,6 +41,17 @@ public class GroupAddServlet extends HttpServlet {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("/errors/cantBeBlank.jsp");
             requestDispatcher.forward(req, resp);
         }
+
+
+
+
+
+
+
+
+
+
+
 
 //        if (!name.equals("")){
 //            try {

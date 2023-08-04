@@ -1,6 +1,10 @@
 package com.google.group_crud_jakartaee.models.student;
 
+import com.google.group_crud_jakartaee.models.group.Groups;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,14 +20,19 @@ public class Students {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank
     private String fullName;
 
     @CreationTimestamp
-    @Column(insertable = true, updatable = false)
+    @Column(updatable = false)
     private String createdAt;
-    private int groupID = 4;
 
+    @ManyToOne
+    private Groups groups;
+
+    @Min(value = 12, message = "Student cannot be younger than {value}")
     private int age;
 
+    @NotNull
     private String createdBy;
 }

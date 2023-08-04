@@ -32,7 +32,7 @@ public class StudentDeleteServlet extends HttpServlet {
                 var st = Students.builder().id(resultSet.getInt("id")).
                         age(resultSet.getInt("age")).
                         createdAt(resultSet.getString("createdAt")).
-                        groupID(resultSet.getInt("groupId")).
+//                        groups(resultSet.getInt("groupId")).
                         fullName(resultSet.getString("fullName"))
                         .build();
                 req.setAttribute("st", st);

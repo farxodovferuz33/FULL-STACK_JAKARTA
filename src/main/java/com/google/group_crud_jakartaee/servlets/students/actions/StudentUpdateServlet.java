@@ -31,7 +31,7 @@ public class StudentUpdateServlet extends HttpServlet {
                         Students.builder().id(resultSet.getInt("id")).
                                 createdAt(resultSet.getString("createdAt")).
                                 age(resultSet.getInt("age")).
-                                groupID(resultSet.getInt("groupID")).
+//                                groupID(resultSet.getInt("groupID")).
                                 fullName(resultSet.getString("fullName")).
                                 build()
                 );
